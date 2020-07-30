@@ -4,7 +4,7 @@
 
 'use strict';
 
-const DataContract = require('./lib/data-contract');
+const DataContract = require('./lib/data/data-contract');
 const ProcessRequestContract = require('./lib/process-request-contract');
 const ProcessorContract = require('./lib/processor-contract');
 
