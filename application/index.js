@@ -1,21 +1,13 @@
 var http = require('http'),
     path = require('path'),
-    // methods = require('methods'),
     express = require('express'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
-    // favicon = require('serve-favicon'),
-    // cors = require('cors'),
-    // passport = require('passport'),
     errorhandler = require('errorhandler');
-    // mongoose = require('mongoose');
 
 var isProduction = process.env.NODE_ENV === 'production';
 
-// Create global app object
 var app = express();
-
-// app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,12 +28,6 @@ if (!isProduction) {
   app.use(errorhandler());
 }
 
-// if(isProduction){
-//   mongoose.connect(process.env.MONGODB_URI);
-// } else {
-//   mongoose.connect('mongodb://localhost/conduit');
-//   mongoose.set('debug', true);
-// }
 
 // require('./models/User');
 // require('./models/Article');
