@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "pug": "^3.0.0"
+    "pug": "^3.0.0",
+    "startbootstrap-sb-admin-2": "^4.1.1"
   },
   "devDependencies": {
     "express-session": "1.17.0",

@@ -70,8 +70,12 @@ app.use(function(req, res, next){
   req.session.messages = [];
 });
 
+
+// app.use('/', indexRouter);
+
 // load controllers
 require('./lib/boot')(app, { verbose: !module.parent });
+
 
 app.use(function(err, req, res, next){
   // log it
