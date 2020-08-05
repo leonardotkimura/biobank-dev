@@ -1,15 +1,15 @@
 ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion
   // Sidebar - Brand
-  a.sidebar-brand.d-flex.align-items-center.justify-content-center(href='index.html')
+  a.sidebar-brand.d-flex.align-items-center.justify-content-center(href='/')
     .sidebar-brand-icon.rotate-n-15
-      i.fas.fa-laugh-wink
+      i.fas.fa-dna
     .sidebar-brand-text.mx-3
       | BioBank
   // Divider
   hr.sidebar-divider.my-0
   // Nav Item - Dashboard
   li.nav-item.active
-    a.nav-link(href='index.html')
+    a.nav-link(href='/')
       i.fas.fa-fw.fa-tachometer-alt
       span Página Inicial
   // Divider
@@ -20,7 +20,7 @@ ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordio
   // Nav Item - Pages Collapse Menu
   li.nav-item
     a.nav-link.collapsed(href='#' data-toggle='collapse' data-target='#collapseTwo' aria-expanded='true' aria-controls='collapseTwo')
-      i.fas.fa-fw.fa-cog
+      i.fas.fa-upload
       span Enviar Dados
     #collapseTwo.collapse(aria-labelledby='headingTwo' data-parent='#accordionSidebar')
       .bg-white.py-2.collapse-inner.rounded
@@ -28,16 +28,10 @@ ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordio
         a.collapse-item(href='data/processed-data-new') Dados Processados
   // Nav Item - Utilities Collapse Menu
   li.nav-item
-    a.nav-link.collapsed(href='#' data-toggle='collapse' data-target='#collapseUtilities' aria-expanded='true' aria-controls='collapseUtilities')
-      i.fas.fa-fw.fa-wrench
+    a.nav-link(href='/data')
+      i.fab.fa-bitcoin
       span Comprar Dados
-    #collapseUtilities.collapse(aria-labelledby='headingUtilities' data-parent='#accordionSidebar')
-      .bg-white.py-2.collapse-inner.rounded
-        h6.collapse-header Custom Utilities:
-        a.collapse-item(href='utilities-color.html') Colors
-        a.collapse-item(href='utilities-border.html') Borders
-        a.collapse-item(href='utilities-animation.html') Animations
-        a.collapse-item(href='utilities-other.html') Other
+    
   // Divider
   hr.sidebar-divider
   // Heading
@@ -46,7 +40,7 @@ ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordio
   // Nav Item - Pages Collapse Menu
   li.nav-item
     a.nav-link.collapsed(href='#' data-toggle='collapse' data-target='#collapsePages' aria-expanded='true' aria-controls='collapsePages')
-      i.fas.fa-fw.fa-folder
+      i.fas.fa-fw.fa-server
       span Processadores
     #collapsePages.collapse(aria-labelledby='headingPages' data-parent='#accordionSidebar')
       .bg-white.py-2.collapse-inner.rounded
@@ -61,7 +55,7 @@ ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordio
   // Nav Item - Charts
   li.nav-item
     a.nav-link(href='charts.html')
-      i.fas.fa-fw.fa-chart-area
+      i.fas.fa-fw.fa-file-invoice
       span Requisições
   // Divider
   hr.sidebar-divider.d-none.d-md-block
