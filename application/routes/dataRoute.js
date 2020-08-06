@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var DataController = require('./../controllers/data')
+var DataController = require('../controllers/dataController')
 
 router.get('/', DataController.index);
 router.get('/raw-data-new', DataController.newRawData);

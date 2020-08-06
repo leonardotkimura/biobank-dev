@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.use('/', require('./home'));
-router.use('/data', require('./data'));
+router.use('/', require('./homeRoute'));
+router.use('/data', require('./dataRoute'));
 
 module.exports = router;
