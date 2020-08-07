@@ -2,23 +2,21 @@ const DataContract = require('../contract/dataContract');
 const ControllerUtil = require('./ControllerUtil.js');
 
 exports.index = async function(req, res, next){
-  const data = { 
-    type: ControllerUtil.formatDataType("raw_data"),
-    title: "DNA Sapos da Amazonia", 
-    description: "Esse é um dado muito relevante sobre Sapos da Amazonia",
-    collector: "Indios Tupi Guarani",
-    date: ControllerUtil.formatDate(new Date()),
-    price: "400"
-  }
+  const dataContract = new DataContract();
+  const datas = await dataContract.getAllData();
 
-  const datas = [data,data,data,data,data,data,data,data,data,data,
-                 data,data,data,data,data,data,data,data,data,data,
-                 data,data,data,data,data,data,data,data,data,data,
-                 data,data,data,data,data,data,data,data,data,data,
-                 data,data]
-  
+  const formattedDatas = datas.map(function(data){
+    return {
+      type: ControllerUtil.formatDataType(data.type),
+      title: data.title, 
+      description: data.description,
+      collector: data.collector,
+      created_at: ControllerUtil.formatDate(new Date(data.created_at)),
+      price: data.price
+    }
+  })  
 
-  res.render('data/index', { datas });
+  res.render('data/index', { datas: formattedDatas });
 };
 
 

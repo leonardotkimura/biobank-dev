@@ -22,6 +22,14 @@ class DataList extends StateList {
     async updateData(data) {
         return this.updateState(data);
     }
+
+    async getAllRawData() {
+        return this.getStateByRange("raw_data:0","raw_data:z");
+    } 
+    
+    async getAllProcessedData() {
+        return this.getStateByRange("processed_data:0", "processed_data:z");
+    }
 }
 
 
