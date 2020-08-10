@@ -15,8 +15,8 @@ class ProcessorList extends StateList {
         return this.addState(processor);
     }
 
-    async getProcessor(processorNumber) {
-        const processorKey = Processor.makeKey([processorNumber]);
+    async getProcessor(id) {
+        const processorKey = Processor.makeKey([id]);
         return this.getState(processorKey);
     }
 

@@ -11,11 +11,11 @@ const ProcessorContract = require('./processor/processor-contract');
 
 class ProcessRequestContract extends Contract {
 
-    async createProcessRequest(ctx, rawDataNumber, processorNumber) {
+    async createProcessRequest(ctx, rawDataNumber, processorId) {
         initializeDataContract(ctx);
         const rawData = await ctx.dataContract.readData(ctx, "raw_data", rawDataNumber);
 
-        const processRequest = { processorNumber , status: "not_processed" };
+        const processRequest = { processorId, status: "not_processed" };
         rawData.addProcessRequest(processRequest);
         await ctx.dataList.updateState(rawData);
 

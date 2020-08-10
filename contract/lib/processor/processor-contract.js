@@ -17,14 +17,14 @@ class ProcessorContract extends Contract {
         return new ProcessorContext();
     }
 
-    async createProcessor(ctx, processorNumber, name, organization) {
-        const processor = Processor.createInstance(processorNumber, name, organization);
+    async createProcessor(ctx, id, name, organization) {
+        const processor = Processor.createInstance(id, name, organization);
         await ctx.processorList.addProcessor(processor);
         return processor;
     }
 
-    async readProcessor(ctx, processorNumber) {
-        const processor = await ctx.processorList.getProcessor(processorNumber);
+    async readProcessor(ctx, id) {
+        const processor = await ctx.processorList.getProcessor(id);
         return processor;
     }
 }
