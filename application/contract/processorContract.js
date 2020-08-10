@@ -30,8 +30,7 @@ class ProcessorContract {
     const result = await this.contract.submitTransaction(
       'ProcessorContract:createProcessor',
       processor.id,
-      processor.name,
-      processor.organization
+      JSON.stringify(processor)
     )
 
     await this.gateway.disconnect();

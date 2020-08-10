@@ -17,8 +17,9 @@ class ProcessorContract extends Contract {
         return new ProcessorContext();
     }
 
-    async createProcessor(ctx, id, name, organization) {
-        const processor = Processor.createInstance(id, name, organization);
+    async createProcessor(ctx, id, processorAttributes) {
+        const newProcessorAttributes = handleProcessorAttributes(id, processorAttributes)
+        const processor = Processor.createInstance(newProcessorAttributes);
         await ctx.processorList.addProcessor(processor);
         return processor;
     }
@@ -27,6 +28,14 @@ class ProcessorContract extends Contract {
         const processor = await ctx.processorList.getProcessor(id);
         return processor;
     }
+}
+
+function handleProcessorAttributes(id, processorAttributes) {
+    const { name, organization, created_at } = JSON.parse(processorAttributes);
+    const newDataAttributes = { 
+        id, name, organization, created_at 
+    }
+    return newDataAttributes;
 }
 
 module.exports = ProcessorContract;

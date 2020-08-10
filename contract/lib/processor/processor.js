@@ -40,8 +40,8 @@ class Processor extends State {
     /**
      * Factory method to create a commercial paper object
      */
-    static createInstance(id, name, organization) {
-      return new Processor({ id, name, organization });
+    static createInstance(processorAttributes) {
+      return new Processor(processorAttributes);
     }
 
     static getClass() {
