@@ -1,4 +1,17 @@
-| show.pug
-| #{processor.id}
-| #{processor.name}
-| #{processor.organization}
+extends ../layout/layout.pug
+  
+block append header
+
+block content
+  | show.pug
+  | #{processor.id}
+  | #{processor.name}
+  | #{processor.organization}
+
+
+    
+            
+block append scripts 
+ 
+
+

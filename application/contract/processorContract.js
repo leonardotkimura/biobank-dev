@@ -37,15 +37,17 @@ class ProcessorContract {
     await this.gateway.disconnect();
   }
 
-  // async readData(type, dataNumber) {
-  //   await this.connectNetwork();
+  async readProcessor(processorId) {
+    await this.connectNetwork();
 
-  //   const result = await this.contract.evaluateTransaction('ProcessorContract:readData', type, dataNumber);
-  //   console.log(`Transaction has been submitted: ${result.toString()}`);
+    const result = await this.contract.evaluateTransaction(
+      'ProcessorContract:readProcessor',
+      processorId
+    );
 
-  //   await this.gateway.disconnect();
-  //   return JSON.parse(result.toString());
-  // }
+    await this.gateway.disconnect();
+    return JSON.parse(result.toString());
+  }
 
   // async getAllData() {
   //   await this.connectNetwork();

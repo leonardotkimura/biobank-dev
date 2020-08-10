@@ -20,12 +20,14 @@ exports.create = async function(req, res, next){
   const processorContract = new ProcessorContract();
   await processorContract.createProcessor(processor)
 
-  res.render('processor/show', { processor });
+  res.redirect("/processor/" + processor.id)
 };
 
 exports.show = async function(req, res, next){
+  const processorContract = new ProcessorContract();
+  const processor = await processorContract.readProcessor(req.params.processor)
   
-  res.render('processor/show', { });
+  res.render('processor/show', { processor });
 };
 
 function createProcessorFromRequest(req){
