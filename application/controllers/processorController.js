@@ -1,4 +1,4 @@
-const DataContract = require('../contract/dataContract');
+const ProcessorContract = require('../contract/processorContract');
 const ControllerUtil = require('./ControllerUtil.js');
 
 
@@ -15,10 +15,12 @@ exports.new = async function(req, res, next){
 };
 
 exports.create = async function(req, res, next){
-  let processor = getProcessorFromRequest(req);
-  processor.id = ControllerUtil.generateId();
+  let processor = createProcessorFromRequest(req);
   
-  res.render('processor/new', { });
+  const processorContract = new ProcessorContract();
+  await processorContract.createProcessor(processor)
+
+  res.render('processor/show', { processor });
 };
 
 exports.show = async function(req, res, next){
@@ -26,9 +28,10 @@ exports.show = async function(req, res, next){
   res.render('processor/show', { });
 };
 
-function getProcessorFromRequest(req){
+function createProcessorFromRequest(req){
   return {
     name: req.body.name,
-    organization: req.body.organization
+    organization: req.body.organization,
+    id: ControllerUtil.generateId()
   }
 }
