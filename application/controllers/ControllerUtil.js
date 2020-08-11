@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 class ControllerUtil {
   static formatDate (date) {
     const day  = date.getDate().toString().padStart(2, '0');
@@ -9,6 +11,10 @@ class ControllerUtil {
   static formatDataType (type) {
     if (type == "raw_data") return "Bruto"
     if (type == "processed_data") return "Processado"
+  }
+
+  static generateId(){
+    return uuidv4();
   }
 }
 

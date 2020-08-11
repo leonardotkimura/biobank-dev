@@ -8,8 +8,4 @@ router.post('/raw-data-create', DataController.createRawData);
 router.post('/processed-data-create', DataController.createRawData);
 router.get('/:dataId', DataController.show);
 
-
-
-
-
 module.exports = router;
