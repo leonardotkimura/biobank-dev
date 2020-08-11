@@ -3,9 +3,15 @@ const ControllerUtil = require('./ControllerUtil.js');
 
 
 exports.index = async function(req, res, next){
-  
+  const processorContract = new ProcessorContract();
+  const processors = await processorContract.getAllProcessor();
 
-  res.render('processor/index', { });
+  const formattedProcessors = processors.map(function(processor){
+    processor.created_at = ControllerUtil.formatDate(new Date(processor.created_at))
+    return processor
+  })  
+
+  res.render('processor/index', { processors: formattedProcessors });
 };
 
 
@@ -26,7 +32,7 @@ exports.create = async function(req, res, next){
 exports.show = async function(req, res, next){
   const processorContract = new ProcessorContract();
   const processor = await processorContract.readProcessor(req.params.processor)
-  
+
   processor.created_at = ControllerUtil.formatDate(new Date(processor.created_at))
 
   res.render('processor/show', { processor });

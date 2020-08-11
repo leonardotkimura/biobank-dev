@@ -23,6 +23,10 @@ class ProcessorList extends StateList {
     async updateProcessor(processor) {
         return this.updateState(processor);
     }
+
+    async getAllProcessor() {
+        return this.getStateByRange(" ","z")
+    }
 }
 
 

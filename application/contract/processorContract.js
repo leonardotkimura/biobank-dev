@@ -48,15 +48,14 @@ class ProcessorContract {
     return JSON.parse(result.toString());
   }
 
-  // async getAllData() {
-  //   await this.connectNetwork();
+  async getAllProcessor() {
+    await this.connectNetwork();
 
-  //   const result = await this.contract.evaluateTransaction('ProcessorContract:getAllData');
-  //   console.log(`Transaction has been submitted: ${result.toString()}`);
+    const result = await this.contract.evaluateTransaction('ProcessorContract:getAllProcessor');
 
-  //   await this.gateway.disconnect();
-  //   return JSON.parse(result.toString());
-  // }
+    await this.gateway.disconnect();
+    return JSON.parse(result.toString());
+  }
 }
   
 module.exports = ProcessorContract;

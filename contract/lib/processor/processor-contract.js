@@ -28,6 +28,10 @@ class ProcessorContract extends Contract {
         const processor = await ctx.processorList.getProcessor(id);
         return processor;
     }
+
+    async getAllProcessor(ctx) {
+        return await ctx.processorList.getAllProcessor();
+    }
 }
 
 function handleProcessorAttributes(id, processorAttributes) {
