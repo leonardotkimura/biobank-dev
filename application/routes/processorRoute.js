@@ -6,8 +6,4 @@ router.get('/new', ProcessorController.new);
 router.post('/new', ProcessorController.create);
 router.get('/:processor', ProcessorController.show);
 
-
-
-
-
 module.exports = router;

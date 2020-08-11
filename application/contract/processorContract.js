@@ -57,5 +57,5 @@ class ProcessorContract {
     return JSON.parse(result.toString());
   }
 }
-  
+
 module.exports = ProcessorContract;

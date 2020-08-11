@@ -1,5 +1,5 @@
 extends ../layout/layout.pug
-  
+
 block append header
 
 block content
@@ -17,11 +17,10 @@ block content
                 input#name.form-control.form-control-user(name='name' type='text' placeholder='Nome do Processador')
               .form-group
                 input#organization.form-control.form-control-user(name='organization' type='text' placeholder='Organização Responsável')
-              hr  
+              hr
               .float-right.mb-4.inline-block
                 a.btn.btn-danger.btn-user.mr-3.px-5(href='/processor')
-                  | Cancelar 
+                  | Cancelar
                 input.btn.btn-primary.btn-user.px-5(type='submit' value='Adicionar')
 
-block append scripts 
- 
+block append scripts

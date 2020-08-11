@@ -24,7 +24,7 @@ class DataContract {
      this.contract = network.getContract('chaincode-builder');
   }
 
-    
+
 
   // async uploadRawData(ctx, dataNumber, dataAttributes) {
   //   const newDataAttributes = handleDataAttributes( dataNumber, 'raw_data', dataAttributes )
@@ -65,16 +65,16 @@ class DataContract {
   //     const data = Data.createInstance(newDataAttributes);
   //     await ctx.dataList.updateState(data);
   //     return data
-      
-      
+
+
   // function handleDataAttributes(dataNumber, type, dataAttributes) {
   //   const { url, processor, description, collector, owners, price, conditions } = JSON.parse(dataAttributes);
-  //   let newDataAttributes = { 
+  //   let newDataAttributes = {
   //       type, dataNumber, url, description, collector, processor, owners, price, conditions
   //   }
   //   if (type == 'raw_data') { delete  newDataAttributes.processor };
   //   return newDataAttributes;
   // }
 }
-  
+
 module.exports = DataContract;

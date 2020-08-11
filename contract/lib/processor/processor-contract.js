@@ -36,8 +36,8 @@ class ProcessorContract extends Contract {
 
 function handleProcessorAttributes(id, processorAttributes) {
     const { name, organization, created_at } = JSON.parse(processorAttributes);
-    const newDataAttributes = { 
-        id, name, organization, created_at 
+    const newDataAttributes = {
+        id, name, organization, created_at
     }
     return newDataAttributes;
 }
