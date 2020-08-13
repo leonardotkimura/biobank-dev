@@ -25,7 +25,7 @@ class ProcessorList extends StateList {
     }
 
     async getAllProcessor() {
-        return this.getStateByRange(" ","z")
+        return this.getStateByRange()
     }
 }
 

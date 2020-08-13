@@ -24,11 +24,11 @@ class DataList extends StateList {
     }
 
     async getAllRawData() {
-        return this.getStateByRange("raw_data:0","raw_data:z");
+        return this.getStateByRange();
     }
 
     async getAllProcessedData() {
-        return this.getStateByRange("processed_data:0", "processed_data:z");
+        return this.getStateByRange();
     }
 }
 

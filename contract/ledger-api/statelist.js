@@ -17,14 +17,13 @@ class StateList {
     }
 
     async addState(state) {
-        let key = this.ctx.stub.createCompositeKey(this.name, state.getSplitKey());
+        let key = state.getKey();
         let data = State.serialize(state);
         await this.ctx.stub.putState(key, data);
     }
 
     async getState(key) {
-        let ledgerKey = this.ctx.stub.createCompositeKey(this.name, State.splitKey(key));
-        let data = await this.ctx.stub.getState(ledgerKey);
+        let data = await this.ctx.stub.getState(key);
         if (data && data.toString('utf8')) {
             let state = State.deserialize(data, this.supportedClasses);
             return state;
@@ -34,17 +33,14 @@ class StateList {
     }
 
     async updateState(state) {
-        let key = this.ctx.stub.createCompositeKey(this.name, state.getSplitKey());
+        let key = state.getKey();
         let data = State.serialize(state);
         await this.ctx.stub.putState(key, data);
     }
 
-    async getStateByRange(startKey, endKey) {
-        const sKey = this.ctx.stub.createCompositeKey(this.name, State.splitKey(startKey));
-        const eKey = this.ctx.stub.createCompositeKey(this.name, State.splitKey(endKey));
+    async getStateByRange() {
         const treatedResults = [];
-
-        let allResults = await this.ctx.stub.getStateByRange(sKey, eKey)
+        let allResults = await this.ctx.stub.getStateByRange("", "")
 
         let response = await allResults.next();
         while(response.value)  {
@@ -52,11 +48,10 @@ class StateList {
             const data = response.value.value.toString('utf8');
             try {
                 record = State.deserialize(data, this.supportedClasses);
+                treatedResults.push(record);
             } catch (err) {
                 console.log(err);
-                record = data;
             }
-            treatedResults.push(record);
             response = await allResults.next();
         }
         return treatedResults;
