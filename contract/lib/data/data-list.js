@@ -23,12 +23,12 @@ class DataList extends StateList {
         return this.updateState(data);
     }
 
-    async getAllRawData() {
-        return this.getStateByRange();
-    }
-
-    async getAllProcessedData() {
-        return this.getStateByRange();
+    async getDataByType(type) {
+        const response = await this.getStateByRange();
+        const typeDatas = response.filter(function(data){
+            return data.type == type
+        })
+        return typeDatas
     }
 }
 

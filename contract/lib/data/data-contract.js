@@ -46,8 +46,8 @@ class DataContract extends Contract {
     }
 
     async getAllData(ctx) {
-        const allRawData = await ctx.dataList.getAllRawData();
-        const allProcessedData = await ctx.dataList.getAllProcessedData();
+        const allRawData = await ctx.dataList.getDataByType('raw_data');
+        const allProcessedData = await ctx.dataList.getDataByType('processed_data');
         return allRawData.concat(allProcessedData);
     }
 }
