@@ -13,7 +13,7 @@
             th Preço
             th Ações
         tbody
-          each data in datas
+          each data, index in datas
             tr
               td
                 = data.type
@@ -30,7 +30,23 @@
                   data-toggle="tooltip" data-placement="top" title="Ver Detalhes" href="/data/" + data.key
                 )
                   i.fas.fa-eye
-                a.btn.btn-primary.btn-sm.btn-circle.mr-2(
-                  data-toggle="tooltip" data-placement="top" title="Comprar" href='#'
+                a.btn.btn-primary.btn-sm.btn-circle.mr(
+                  data-placement="top" title="Comprar" data-toggle="modal" data-target="#buyModal"+index  href='#'
                 )
                   i.fas.fa-shopping-cart
+
+            .modal.fade(id= "buyModal"+index tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+              .modal-dialog(role='document')
+                .modal-content
+                  .modal-header
+                    h5#exampleModalLabel.modal-title Confirmar compra?
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                      span(aria-hidden='true') &times;
+                  .modal-body Clique em &quot;Comprar&quot; abaixo para confirmar a compra por 
+                    = data.price
+                    |  moedas
+                  .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Cancelar
+                    form.user(action='/operation/new' method='post')
+                      input#key(hidden name='key' type='text' value=data.key)
+                      input.btn.btn-primary.btn-user(type='submit' value='Comprar')
