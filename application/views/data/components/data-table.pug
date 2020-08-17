@@ -11,6 +11,7 @@
             th Coletor
             th Criado em
             th Preço
+            th Ações
         tbody
           each data in datas
             tr
@@ -24,3 +25,12 @@
                 = data.created_at
               td
                 = data.price
+              td
+                a.btn.btn-info.btn-sm.btn-circle.mr-2(
+                  data-toggle="tooltip" data-placement="top" title="Ver Detalhes" href="/data/" + data.key
+                )
+                  i.fas.fa-eye
+                a.btn.btn-primary.btn-sm.btn-circle.mr-2(
+                  data-toggle="tooltip" data-placement="top" title="Comprar" href='#'
+                )
+                  i.fas.fa-shopping-cart
