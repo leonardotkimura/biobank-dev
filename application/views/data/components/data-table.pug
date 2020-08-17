@@ -13,7 +13,7 @@
             th Preço
             th Ações
         tbody
-          each data in datas
+          each data, index in datas
             tr
               td
                 = data.type
@@ -30,7 +30,8 @@
                   data-toggle="tooltip" data-placement="top" title="Ver Detalhes" href="/data/" + data.key
                 )
                   i.fas.fa-eye
-                a.btn.btn-primary.btn-sm.btn-circle.mr-2(
-                  data-toggle="tooltip" data-placement="top" title="Comprar" href='#'
+                a.btn.btn-primary.btn-sm.btn-circle.mr(
+                  data-placement="top" title="Comprar" data-toggle="modal" data-target="#buyModal"+index  href='#'
                 )
                   i.fas.fa-shopping-cart
+            include buy-modal.pug

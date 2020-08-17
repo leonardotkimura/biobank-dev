@@ -7,6 +7,7 @@ exports.index = async function(req, res, next){
 
   const formattedDatas = datas.map(function(data){
     return {
+      key: data.key,
       type: ControllerUtil.formatDataType(data.type),
       title: data.title,
       description: data.description,
@@ -21,22 +22,18 @@ exports.index = async function(req, res, next){
 
 
 exports.newRawData = async function(req, res, next){
-
   res.render('data/raw-data-new', { });
 };
 
 exports.newProcessedData = async function(req, res, next){
-
   res.render('data/processed-data-new', { });
 };
 
 exports.createRawData = async function(req, res, next){
-
   res.render('data/raw-data-new', { });
 };
 
 exports.createProcessedData = async function(req, res, next){
-
   res.render('data/processed-data-new', { });
 };
 
@@ -51,4 +48,8 @@ exports.show = async function(req, res, next){
   data.created_at = ControllerUtil.formatDate(new Date(data.created_at));
 
   res.render('data/show', { data });
+};
+
+exports.listOperations = async function(req, res, next){
+  res.render('data/list-operations', { });
 };
