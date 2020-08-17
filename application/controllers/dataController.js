@@ -42,6 +42,14 @@ exports.createProcessedData = async function(req, res, next){
 };
 
 exports.show = async function(req, res, next){
+  const type = req.params.dataId.split(':')[0];
+  const dataId = req.params.dataId.split(':')[1];
 
-  res.render('data/show', { });
+  const dataContract = new DataContract();
+  const data = await dataContract.readData(type, dataId);
+
+  data.type = ControllerUtil.formatDataType(data.type);
+  data.created_at = ControllerUtil.formatDate(new Date(data.created_at));
+
+  res.render('data/show', { data });
 };
