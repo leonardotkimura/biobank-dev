@@ -7,7 +7,6 @@ exports.index = async function(req, res, next){
 
   const formattedDatas = datas.map(function(data){
     return {
-      key: data.key,
       type: ControllerUtil.formatDataType(data.type),
       title: data.title,
       description: data.description,
