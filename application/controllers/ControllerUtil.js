@@ -13,6 +13,13 @@ class ControllerUtil {
     if (type == "processed_data") return "Processado"
   }
 
+  static formatOperationType (type) {
+    if (type == "buy") return "Compra"
+    if (type == "upload") return "Upload"
+    if (type == "process") return "Processamento"
+    if (type == "request_process") return "Solicitação de Processamento"
+  }
+
   static generateId(){
     return uuidv4();
   }

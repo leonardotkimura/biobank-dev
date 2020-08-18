@@ -14,6 +14,8 @@ exports.show = async function(req, res, next){
   const operation = await operationContract.readOperation(req.params.operation)
 
   operation.created_at = ControllerUtil.formatDate(new Date(operation.created_at))
+  operation.type = ControllerUtil.formatOperationType(operation.type)
+
   res.render('operation/show', { operation });
 };
 
@@ -25,7 +27,7 @@ function createOperationFromRequest(req){
     user: 'Toshi',
     created_at: new Date().toDateString(),
     details: {
-      value: req.body.data_value,
+      price: req.body.price,
       seller: req.body.collector
     }
   }
