@@ -10,7 +10,8 @@
             th Data
             th Tipo
             th Usuário
-            th ID da transação
+            th ID da Operação
+            th Ação
         tbody
           each operation in operations
             tr
@@ -21,5 +22,10 @@
               td
                 = operation.user
               td
-                = operation.transaction_id
+                = operation.id
+              td
+                a.btn.btn-info.btn-sm.btn-circle(
+                  data-toggle="tooltip" data-placement="top" title="Ver Detalhes" href="/operation/" + operation.id
+                )
+                  i.fas.fa-eye
 

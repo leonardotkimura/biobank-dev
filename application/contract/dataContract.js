@@ -24,26 +24,10 @@ class DataContract {
      this.contract = network.getContract('chaincode-builder');
   }
 
-
-
-  // async uploadRawData(ctx, dataNumber, dataAttributes) {
-  //   const newDataAttributes = handleDataAttributes( dataNumber, 'raw_data', dataAttributes )
-  //   const data = Data.createInstance(newDataAttributes);
-  //   await ctx.dataList.addData(data);
-  //   return data;
-  // }
-
-  // async uploadProcessedData(ctx, dataNumber, dataAttributes) {
-  //     const newDataAttributes = handleDataAttributes(dataNumber, 'processed_data', dataAttributes)
-  //     const data = Data.createInstance(newDataAttributes);
-  //     await ctx.dataList.addData(data);
-  //     return data;
-  // }
-
-  async readData(type, dataNumber) {
+  async readData(dataId) {
     await this.connectNetwork();
 
-    const result = await this.contract.evaluateTransaction('DataContract:readData', type, dataNumber);
+    const result = await this.contract.evaluateTransaction('DataContract:readData', dataId);
     console.log(`Transaction has been submitted: ${result.toString()}`);
 
     await this.gateway.disconnect();
@@ -69,22 +53,6 @@ class DataContract {
     await this.gateway.disconnect();
     return JSON.parse(result.toString());
   }
-
-  // async updateData(ctx, type, dataNumber, dataAttributes){
-  //     const newDataAttributes = handleDataAttributes(dataNumber, type, dataAttributes);
-  //     const data = Data.createInstance(newDataAttributes);
-  //     await ctx.dataList.updateState(data);
-  //     return data
-
-
-  // function handleDataAttributes(dataNumber, type, dataAttributes) {
-  //   const { url, processor, description, collector, owners, price, conditions } = JSON.parse(dataAttributes);
-  //   let newDataAttributes = {
-  //       type, dataNumber, url, description, collector, processor, owners, price, conditions
-  //   }
-  //   if (type == 'raw_data') { delete  newDataAttributes.processor };
-  //   return newDataAttributes;
-  // }
 }
 
 module.exports = DataContract;
