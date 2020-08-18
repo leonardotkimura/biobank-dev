@@ -1,0 +1,25 @@
+.card.shadow.mb-4
+  .card-header.py-3
+    h6.m-0.font-weight-bold.text-primary 
+      = data.title
+  .card-body
+    .table-responsive
+      table#dataTable.table.table-bordered(width='100%' cellspacing='0')
+        thead
+          tr
+            th Data
+            th Tipo
+            th Usuário
+            th ID da transação
+        tbody
+          each operation in operations
+            tr
+              td
+                = operation.created_at
+              td
+                = operation.type
+              td
+                = operation.user
+              td
+                = operation.transaction_id
+

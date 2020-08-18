@@ -19,6 +19,10 @@ class OperationList extends StateList {
         const operationKey = Operation.makeKey([id]);
         return this.getState(operationKey);
     }
+
+    async getAllOperation() {
+        return this.getStateByRange()
+    }
 }
 
 

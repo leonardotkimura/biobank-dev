@@ -28,6 +28,18 @@ class OperationContract extends Contract {
         const operation = await ctx.operationList.getOperation(id);
         return operation;
     }
+
+    async getAllOperation(ctx) {
+        return await ctx.operationList.getAllOperation();
+    }
+
+    async getOperationByData(ctx, dataId) {
+        const allOperation = await this.getAllOperation(ctx);
+
+        return allOperation.filter(function(operation) {
+            return operation.data_id == dataId
+        })
+    }
 }
 
 function handleOperationAttributes(id, operationAttributes) {

@@ -39,8 +39,7 @@ exports.createProcessedData = async function(req, res, next){
 };
 
 exports.show = async function(req, res, next){
-  const type = req.params.dataId.split(':')[0];
-  const dataId = req.params.dataId.split(':')[1];
+  const { type, dataId } = getDataParams(req);
 
   const dataContract = new DataContract();
   const data = await dataContract.readData(type, dataId);
@@ -52,5 +51,27 @@ exports.show = async function(req, res, next){
 };
 
 exports.listOperations = async function(req, res, next){
-  res.render('data/list-operations', { });
+  const { type, dataId } = getDataParams(req);
+
+  const dataContract = new DataContract();
+  const data = await dataContract.readData(type, dataId);
+  const operations = await dataContract.getAllOperation(req.params.dataId);
+
+  const formattedOperations = operations.map(function(operation){
+    return {
+      user: operation.user,
+      transaction_id: operation.transaction_id,
+      type: ControllerUtil.formatOperationType(operation.type),
+      created_at: ControllerUtil.formatDate(new Date(operation.created_at)),
+    }
+  })
+
+  res.render('data/list-operations', { data, operations: formattedOperations });
 };
+
+function getDataParams(req) {
+  return {
+    type: req.params.dataId.split(':')[0],
+    dataId: req.params.dataId.split(':')[1]
+  }
+}

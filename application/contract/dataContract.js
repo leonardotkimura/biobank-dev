@@ -60,6 +60,16 @@ class DataContract {
     return JSON.parse(result.toString());
   }
 
+  async getAllOperation(dataId) {
+    await this.connectNetwork();
+
+    const result = await this.contract.evaluateTransaction('OperationContract:getOperationByData', dataId);
+    console.log(`Transaction has been submitted: ${result.toString()}`);
+
+    await this.gateway.disconnect();
+    return JSON.parse(result.toString());
+  }
+
   // async updateData(ctx, type, dataNumber, dataAttributes){
   //     const newDataAttributes = handleDataAttributes(dataNumber, type, dataAttributes);
   //     const data = Data.createInstance(newDataAttributes);
