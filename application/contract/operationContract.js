@@ -4,7 +4,7 @@ const { FileSystemWallet, Gateway }  = require('fabric-network');
 const path = require('path');
 const fs = require('fs')
 
-class ProcessorContract {
+class OperationContract {
   async connectNetwork() {
      // Create a new file system based wallet for managing identities.
      const walletPath = path.join(process.cwd(), 'fabric-details/Org1Wallet');
@@ -18,44 +18,39 @@ class ProcessorContract {
      await this.gateway.connect(connectionProfile, connectionOptions);
 
      // Get the network (channel) our contract is deployed to.
-     const network = await this.gateway.getNetwork('mychannel');
+     this.network = await this.gateway.getNetwork('mychannel');
 
      // Get the contract from the network.
-     this.contract = network.getContract('chaincode-builder');
+     this.contract = this.network.getContract('chaincode-builder');
   }
 
-  async createProcessor(processor){
+  async createOperation(operation){
     await this.connectNetwork();
 
-    const result = await this.contract.submitTransaction(
-      'ProcessorContract:createProcessor',
-      processor.id,
-      JSON.stringify(processor)
-    )
+    const transaction = this.contract.createTransaction('OperationContract:createOperation')
+    operation.transaction_id = transaction.getTransactionID().getTransactionID()
+
+    const result = await transaction.submit(operation.id, JSON.stringify(operation))
 
     await this.gateway.disconnect();
   }
 
-  async readProcessor(processorId) {
+  async readOperation(operationId) {
     await this.connectNetwork();
 
     const result = await this.contract.evaluateTransaction(
-      'ProcessorContract:readProcessor',
-      processorId
+      'OperationContract:readOperation',
+      operationId
     );
 
     await this.gateway.disconnect();
     return JSON.parse(result.toString());
   }
 
-  async getAllProcessor() {
-    await this.connectNetwork();
-
-    const result = await this.contract.evaluateTransaction('ProcessorContract:getAllProcessor');
-
-    await this.gateway.disconnect();
-    return JSON.parse(result.toString());
+  addTransactionIdInOperation(operation){
+    // operation.transaction_id = this.network.getTransactionID()
+    return operation;
   }
 }
 
-module.exports = ProcessorContract;
+module.exports = OperationContract;

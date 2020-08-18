@@ -1,29 +1,32 @@
-const ProcessorContract = require('../contract/processorContract');
+const OperationContract = require('../contract/operationContract');
 const ControllerUtil = require('./ControllerUtil.js');
 
 exports.create = async function(req, res, next){
-  // let processor = createProcessorFromRequest(req);
+  let operation = createOperationFromRequest(req);
 
-  // const processorContract = new ProcessorContract();
-  // await processorContract.createProcessor(processor)
-  const operation = {id: 'teste'}
+  const operationContract = new OperationContract();
+  await operationContract.createOperation(operation)
   res.redirect("/operation/" + operation.id)
 };
 
 exports.show = async function(req, res, next){
-  // const processorContract = new ProcessorContract();
-  // const processor = await processorContract.readProcessor(req.params.processor)
+  const operationContract = new OperationContract();
+  const operation = await operationContract.readOperation(req.params.operation)
 
-  // processor.created_at = ControllerUtil.formatDate(new Date(processor.created_at))
-  const operation = {}
+  operation.created_at = ControllerUtil.formatDate(new Date(operation.created_at))
   res.render('operation/show', { operation });
 };
 
-function createProcessorFromRequest(req){
+function createOperationFromRequest(req){
   return {
-    name: req.body.name,
-    organization: req.body.organization,
     id: ControllerUtil.generateId(),
-    created_at: new Date().toDateString()
+    data_id: req.body.data_id,
+    type: 'buy',
+    user: 'Toshi',
+    created_at: new Date().toDateString(),
+    details: {
+      value: req.body.data_value,
+      seller: req.body.collector
+    }
   }
 }

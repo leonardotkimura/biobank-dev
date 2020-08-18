@@ -12,7 +12,7 @@ class DataContract {
      console.log(`Wallet path: ${walletPath}`);
 
      // Create a new gateway for connecting to our peer node.
-    this.gateway = new Gateway();
+     this.gateway = new Gateway();
      const connectionProfile = path.resolve(__dirname, '../fabric-details', 'connection.json');
      let connectionOptions = { wallet, identity: 'org1Admin', discovery: { enabled: true, asLocalhost: true }};
      await this.gateway.connect(connectionProfile, connectionOptions);
