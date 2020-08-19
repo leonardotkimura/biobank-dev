@@ -7,7 +7,7 @@ exports.index = async function(req, res, next){
 
   const formattedDatas = datas.map(function(data){
     return {
-      key: data.key,
+      id: data.id,
       type: ControllerUtil.formatDataType(data.type),
       title: data.title,
       description: data.description,
@@ -38,11 +38,10 @@ exports.createProcessedData = async function(req, res, next){
 };
 
 exports.show = async function(req, res, next){
-  const type = req.params.dataId.split(':')[0];
-  const dataId = req.params.dataId.split(':')[1];
+  const dataId = req.params.dataId;
 
   const dataContract = new DataContract();
-  const data = await dataContract.readData(type, dataId);
+  const data = await dataContract.readData(dataId);
 
   data.type = ControllerUtil.formatDataType(data.type);
   data.created_at = ControllerUtil.formatDate(new Date(data.created_at));
@@ -51,5 +50,20 @@ exports.show = async function(req, res, next){
 };
 
 exports.listOperations = async function(req, res, next){
-  res.render('data/list-operations', { });
+  const dataId = req.params.dataId;
+
+  const dataContract = new DataContract();
+  const data = await dataContract.readData(dataId);
+  const operations = await dataContract.getAllOperation(req.params.dataId);
+
+  const formattedOperations = operations.map(function(operation){
+    return {
+      user: operation.user,
+      id: operation.id,
+      type: ControllerUtil.formatOperationType(operation.type),
+      created_at: ControllerUtil.formatDate(new Date(operation.created_at)),
+    }
+  })
+
+  res.render('data/list-operations', { data, operations: formattedOperations });
 };

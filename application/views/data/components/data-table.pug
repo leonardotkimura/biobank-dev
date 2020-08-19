@@ -27,9 +27,13 @@
                 = data.price
               td
                 a.btn.btn-info.btn-sm.btn-circle.mr-2(
-                  data-toggle="tooltip" data-placement="top" title="Ver Detalhes" href="/data/" + data.key
+                  data-toggle="tooltip" data-placement="top" title="Ver Detalhes" href="/data/" + data.id
                 )
                   i.fas.fa-eye
+                a.btn.btn-secondary.btn-sm.btn-circle.mr-2(
+                  data-toggle="tooltip" data-placement="top" title="Ver Histórico" href="/data/" + data.id + "/list-operations"
+                )
+                  i.fas.fa-history
                 a.btn.btn-primary.btn-sm.btn-circle.mr(
                   data-placement="top" title="Comprar" data-toggle="modal" data-target="#buyModal"+index  href='#'
                 )
