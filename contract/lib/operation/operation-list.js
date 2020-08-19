@@ -5,7 +5,6 @@ const StateList = require('../../ledger-api/statelist.js');
 const Operation = require('./operation.js');
 
 class OperationList extends StateList {
-
     constructor(ctx) {
         super(ctx, 'org.operationList');
         this.use(Operation);

@@ -35,10 +35,10 @@ class OperationContract extends Contract {
 
     async getOperationByData(ctx, dataId) {
         const allOperation = await this.getAllOperation(ctx);
-
-        return allOperation.filter(function(operation) {
+        const filteredOperation = allOperation.filter(function(operation) {
             return operation.data_id == dataId
         })
+        return filteredOperation
     }
 }
 

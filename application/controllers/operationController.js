@@ -2,7 +2,7 @@ const OperationContract = require('../contract/operationContract');
 const ControllerUtil = require('./ControllerUtil.js');
 
 exports.create = async function(req, res, next){
-  let operation = createOperationFromRequest(req);
+  const operation = createOperationFromRequest(req);
 
   const operationContract = new OperationContract();
   await operationContract.createOperation(operation)
