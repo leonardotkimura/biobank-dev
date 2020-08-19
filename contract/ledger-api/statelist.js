@@ -39,10 +39,19 @@ class StateList {
     }
 
     async getStateByRange() {
-        const treatedResults = [];
-        let allResults = await this.ctx.stub.getStateByRange("", "")
+        const allResults = await this.ctx.stub.getStateByRange("", "")
+        return await this.iterateAndFormatResults(allResults)
+    }
 
+    async getHistoryForKey(key){
+        const allResults = await this.ctx.stub.getHistoryForKey(key)
+        return await this.iterateAndFormatResults(allResults)
+    }
+
+    async iterateAndFormatResults(allResults){
+        const treatedResults = [];
         let response = await allResults.next();
+
         while(response.value)  {
             let record;
             const data = response.value.value.toString('utf8');

@@ -6,8 +6,7 @@ exports.dataQuery = async function(req, res, next){
 };
 
 exports.dataSearch = async function(req, res, next){
-  const data = {id: '123'}
-  res.redirect("/history/" + data.id )
+  res.redirect("/history/data/" + req.body.dataId )
 };
 
 exports.dataShow = async function(req, res, next){

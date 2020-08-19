@@ -30,6 +30,10 @@ class DataList extends StateList {
         })
         return typeDatas
     }
+
+    async getDataHistory(key) {
+        return this.getHistoryForKey(key)
+    }
 }
 
 
