@@ -8,6 +8,11 @@ class ControllerUtil {
     return day+"/"+month+"/"+year;
   }
 
+  static formatCompleteDate (date) {
+    return ControllerUtil.formatDate(date) + " " +
+      date.getHours() + ":" + date.getMinutes()
+  }
+
   static formatDataType (type) {
     if (type == "raw_data") return "Bruto"
     if (type == "processed_data") return "Processado"
