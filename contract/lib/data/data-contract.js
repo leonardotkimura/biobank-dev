@@ -32,6 +32,13 @@ class DataContract extends Contract {
         return data;
     }
 
+    async updateData(ctx, type, dataNumber, dataAttributes){
+        const newDataAttributes = handleDataAttributes(dataNumber, type, dataAttributes);
+        const data = Data.createInstance(newDataAttributes);
+        await ctx.dataList.updateState(data);
+        return data
+    }
+
     async readData(ctx, dataId) {
         let dataKey = Data.makeKey([dataId]);
         let data = await ctx.dataList.getData(dataKey);
@@ -42,6 +49,12 @@ class DataContract extends Contract {
         const allRawData = await ctx.dataList.getDataByType('raw_data');
         const allProcessedData = await ctx.dataList.getDataByType('processed_data');
         return allRawData.concat(allProcessedData);
+    }
+
+    async getDataHistory(ctx, dataId) {
+        let dataKey = Data.makeKey([dataId]);
+        const history = await ctx.dataList.getDataHistory(dataKey);
+        return history
     }
 }
 

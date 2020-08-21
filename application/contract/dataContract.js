@@ -39,6 +39,16 @@ class DataContract {
     await this.gateway.disconnect();
     return JSON.parse(result.toString());
   }
+
+  async getDataHistory(dataId) {
+    await this.connectNetwork();
+
+    const result = await this.contract.evaluateTransaction('DataContract:getDataHistory', dataId);
+    console.log(`Transaction has been submitted: ${result.toString()}`);
+
+    await this.gateway.disconnect();
+    return JSON.parse(result.toString());
+  }
 }
 
 module.exports = DataContract;

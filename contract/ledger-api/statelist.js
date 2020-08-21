@@ -39,15 +39,23 @@ class StateList {
     }
 
     async getStateByRange() {
-        const treatedResults = [];
-        let allResults = await this.ctx.stub.getStateByRange("", "")
+        const allResults = await this.ctx.stub.getStateByRange("", "")
+        return await this.iterateAndFormatResults(allResults, 'state')
+    }
 
+    async getHistoryForKey(key){
+        const allResults = await this.ctx.stub.getHistoryForKey(key)
+        return await this.iterateAndFormatResults(allResults, 'stateHistory')
+    }
+
+    async iterateAndFormatResults(allResults, type){
+        const treatedResults = [];
         let response = await allResults.next();
+
         while(response.value)  {
             let record;
-            const data = response.value.value.toString('utf8');
             try {
-                record = State.deserialize(data, this.supportedClasses);
+                record = this.extractRecord(response, type)
                 treatedResults.push(record);
             } catch (err) {
                 console.log(err);
@@ -55,6 +63,20 @@ class StateList {
             response = await allResults.next();
         }
         return treatedResults;
+    }
+
+    extractRecord(response, type){
+        const dataString = response.value.value.toString('utf8');
+        if (type == 'state')
+            return State.deserialize(dataString, this.supportedClasses);
+        else if (type == 'stateHistory') {
+            const state = State.deserialize(dataString, this.supportedClasses);
+            return {
+                state,
+                txId: response.value.tx_id,
+                timestamp_in_seconds: response.value.timestamp.seconds.low
+            }
+        }
     }
 
     /** Stores the class for future deserialization */
