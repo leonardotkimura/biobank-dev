@@ -1,6 +1,6 @@
 {
   "name": "chaincode-builder",
-  "version": "0.0.117",
+  "version": "0.0.48",
   "description": "My Smart Contract",
   "main": "index.js",
   "engines": {
