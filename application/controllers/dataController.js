@@ -81,7 +81,7 @@ function createRawDataFromRequest(req){
     type : 'raw_data',
     id: ControllerUtil.generateId(),
     title: req.body.name,
-    url: req.body.url,
+    magnet_link: req.body.magnet_link,
     description: req.body.description,
     collector: collector,
     owners: [collector],
