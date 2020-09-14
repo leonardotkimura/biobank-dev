@@ -59,9 +59,11 @@ class DataContract extends Contract {
 }
 
 function handleDataAttributes(id, type, dataAttributes) {
-    const { title, magnet_link, processor, description, collector, owners, price, created_at, conditions } = JSON.parse(dataAttributes);
+    const {
+        title, magnet_link, processor, description, collector, owners, price, process_reward, status, created_at, conditions
+    } = JSON.parse(dataAttributes);
     let newDataAttributes = {
-        type, id, title, magnet_link, description, collector, processor, owners, price, created_at, conditions
+        type, id, title, magnet_link, description, collector, processor, owners, price, process_reward, status, created_at, conditions
     }
     if (type == 'raw_data') { delete  newDataAttributes.processor };
     return newDataAttributes;

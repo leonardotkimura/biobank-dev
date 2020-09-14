@@ -49,6 +49,7 @@ exports.show = async function(req, res, next){
   const data = await dataContract.readData(dataId);
 
   data.type = ControllerUtil.formatDataType(data.type);
+  data.status = ControllerUtil.formatDataStatus(data.status);
   data.created_at = ControllerUtil.formatDate(new Date(data.created_at));
 
   res.render('data/show', { data });
@@ -77,15 +78,18 @@ function createRawDataFromRequest(req){
   // DEFAULT VARIABLES, MUST BE CHANGED
   let collector = 'USER X'
   let default_price = 100
+  let default_process_reward = 10
   return {
     type : 'raw_data',
     id: ControllerUtil.getHashFromMagneticLink(req.body.magnet_link),
     title: req.body.name,
+    status: 'unprocessed',
     magnet_link: req.body.magnet_link,
     description: req.body.description,
     collector: collector,
     owners: [collector],
     price: default_price,
+    process_reward: default_process_reward,
     created_at: new Date().toDateString(),
     conditions: ''
   }

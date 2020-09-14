@@ -21,6 +21,12 @@ class ControllerUtil {
     if (type == "processed_data") return "Processado"
   }
 
+  static formatDataStatus (status) {
+    if (status == "unprocessed") return "Não Processado"
+    if (status == "processing") return "Processando"
+    if (status == "processed") return "Processado"
+  }
+
   static formatOperationType (type) {
     if (type == "buy") return "Compra"
     if (type == "upload") return "Upload"
