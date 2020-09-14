@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
+const magnet = require('magnet-uri')
 
 class ControllerUtil {
   static formatDate (date) {
@@ -29,6 +30,10 @@ class ControllerUtil {
 
   static generateId(){
     return uuidv4();
+  }
+
+  static getHashFromMagneticLink(magnetLink){
+    return magnet.decode(magnetLink).infoHash
   }
 }
 

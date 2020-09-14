@@ -79,7 +79,7 @@ function createRawDataFromRequest(req){
   let default_price = 100
   return {
     type : 'raw_data',
-    id: ControllerUtil.generateId(),
+    id: ControllerUtil.getHashFromMagneticLink(req.body.magnet_link),
     title: req.body.name,
     magnet_link: req.body.magnet_link,
     description: req.body.description,
