@@ -1,3 +1,5 @@
+// This class only work for fabric-network 1.4
+
 const { FileSystemWallet, Gateway }  = require('fabric-network');
 const path = require('path');
 const fs = require('fs')
