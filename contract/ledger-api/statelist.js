@@ -73,7 +73,7 @@ class StateList {
             const state = State.deserialize(dataString, this.supportedClasses);
             return {
                 state,
-                txId: response.value.tx_id,
+                txId: response.value.tx_id, // change in hyperledger Fabric 2.2
                 timestamp_in_seconds: response.value.timestamp.seconds.low
             }
         }

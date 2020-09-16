@@ -25,10 +25,20 @@ form
   .form-group
     label.mb-1(for='owners') Donos
     input#owners.form-control(disabled type='text' value= data.owners)
+  .form-group
+    label.mb-1(for='magnet_link') Link Magnético do dado
+    input#owners.form-control(disabled type='text' value= data.magnet_link)
   .form-row
     .form-group.col-md-6
       label.mb-1(for='price') Preço
-      input#price.form-control(disabled type='text'  value=data.price)
+      input#price.form-control(disabled type='text' value=data.price)
+    .form-group.col-md-6
+      label.mb-1(for='process_reward') Recompensa por processamento
+      input#process_reward.form-control(disabled type='text' value=data.process_reward)
+  .form-row
     .form-group.col-md-6
       label.mb-1(for='created_at') Criado em
-      input#created_at.form-control(disabled type='text'  value=data.created_at)
+      input#created_at.form-control(disabled type='text' value=data.created_at)
+    .form-group.col-md-6
+      label.mb-1(for='status') Status
+      input#status.form-control(disabled type='text' value=data.status)
