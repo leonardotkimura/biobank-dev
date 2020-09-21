@@ -5,12 +5,18 @@
         h5#exampleModalLabel.modal-title Processar esse dado?
         button.close(type='button' data-dismiss='modal' aria-label='Close')
           span(aria-hidden='true') &times;
-      .modal-body Clique em &quot;Processar&quot; abaixo para confirmar a solicitação de processamento
-      .modal-footer
-        button.btn.btn-secondary(type='button' data-dismiss='modal') Cancelar
+      .modal-body 
         form.user(action='/process-request/create' method='post')
-          input#price(hidden name='price' type='text' value=data.price)
-          input#data-id(hidden name='data_id' type='text' value=data.id)
+          input#data-id(hidden name='raw_data_id' type='text' value=data.id)
           input#collector(hidden name='collector' type='text' value=data.collector)
           input#type(hidden name='type' type='text' value='process')
-          input.btn.btn-primary.btn-user(type='submit' value='Processar')
+          .form-group.mb-4
+            label(for='processor') Id do Processador
+            input#processor-id.form-control.form-control-user(name='processor' type='text')
+
+          .mb-3
+            | Clique em &quot;Processar&quot; abaixo para confirmar a solicitação de processamento
+
+          .modal-footer
+            button.btn.btn-secondary(type='button' data-dismiss='modal') Cancelar
+            input.btn.btn-primary.btn-user(type='submit' value='Processar')
