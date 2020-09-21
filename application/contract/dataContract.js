@@ -44,6 +44,16 @@ class DataContract {
     return JSON.parse(result.toString());
   }
 
+  async getAllRawData() {
+    await this.connectNetwork();
+
+    const result = await this.contract.evaluateTransaction('DataContract:getAllRawData');
+    console.log(`Transaction has been submitted: ${result.toString()}`);
+
+    await this.gateway.disconnect();
+    return JSON.parse(result.toString());
+  }
+
   async getAllOperation(dataId) {
     await this.connectNetwork();
 

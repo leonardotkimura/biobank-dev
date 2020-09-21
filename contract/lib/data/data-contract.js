@@ -51,6 +51,11 @@ class DataContract extends Contract {
         return allRawData.concat(allProcessedData);
     }
 
+    async getAllRawData(ctx) {
+        const allRawData = await ctx.dataList.getDataByType('raw_data');
+        return allRawData
+    }
+
     async getDataHistory(ctx, dataId) {
         let dataKey = Data.makeKey([dataId]);
         const history = await ctx.dataList.getDataHistory(dataKey);
