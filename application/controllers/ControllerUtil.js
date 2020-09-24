@@ -34,6 +34,11 @@ class ControllerUtil {
     if (type == "request_process") return "Solicitação de Processamento"
   }
 
+  static formatProcessRequestStatus (type) {
+    if (type == "not_processed") return "Não Processado"
+    if (type == "processed") return "Processado"
+  }
+
   static generateId(){
     return uuidv4();
   }

@@ -17,6 +17,7 @@ exports.show = async function(req, res, next){
   const processor = await processorContract.readProcessor(processRequest.processor_id)
 
   processRequest.created_at = ControllerUtil.formatDate(new Date(processRequest.created_at))
+  processRequest.status = ControllerUtil.formatProcessRequestStatus(processRequest.status);
 
   res.render('processRequest/show', { processRequest, raw_data, processor });
 };
