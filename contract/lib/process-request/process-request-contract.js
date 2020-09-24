@@ -35,9 +35,9 @@ class ProcessRequestContract extends Contract {
 }
 
 function handleProcessRequestAttributes(id, processRequestAttributes) {
-    const { raw_data_id, processor_id, processed_data_id, created_at } = JSON.parse(processRequestAttributes);
+    const { raw_data_id, processor_id, processed_data_id, status, created_at } = JSON.parse(processRequestAttributes);
     const newOperationAttributes = {
-        id, raw_data_id, processor_id, processed_data_id, created_at
+        id, raw_data_id, processor_id, processed_data_id, status, created_at
     }
     return newOperationAttributes;
 }
