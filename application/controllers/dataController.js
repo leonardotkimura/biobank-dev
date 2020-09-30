@@ -1,4 +1,5 @@
 const DataContract = require('../contract/dataContract');
+const ProcessRequestContract = require('../contract/processRequestContract');
 const ControllerUtil = require('./ControllerUtil.js');
 
 exports.index = async function(req, res, next){
@@ -25,21 +26,26 @@ exports.newRawData = async function(req, res, next){
   res.render('data/raw-data-new', { });
 };
 
+exports.createRawData = async function(req, res, next){
+  let rawData = createRawDataFromRequest(req);
+  const dataContract = new DataContract();
+  await dataContract.createRawData(rawData)
+  res.redirect("/data/" + rawData.id)
+};
+
 exports.newProcessedData = async function(req, res, next){
   res.render('data/processed-data-new', { });
 };
 
-exports.createRawData = async function(req, res, next){
-  let rawData = createRawDataFromRequest(req);
-
-  const dataContract = new DataContract();
-  await dataContract.createRawData(rawData)
-
-  res.redirect("/data/" + rawData.id)
-};
-
 exports.createProcessedData = async function(req, res, next){
-  res.render('data/processed-data-new', { });
+  let processedData = createProcessedDataFromRequest(req);
+  const dataContract = new DataContract();
+  await dataContract.createProcessedData(processedData)
+  if(req.body.process_request_id) {
+    const processRequestContract = new ProcessRequestContract()
+    await processRequestContract.changeStatusProcessRequest(req.body.process_request_id, 'processed')
+  }
+  res.redirect("/data/" + processedData.id)
 };
 
 exports.show = async function(req, res, next){
@@ -94,3 +100,26 @@ function createRawDataFromRequest(req){
     conditions: ''
   }
 }
+
+function createProcessedDataFromRequest(req){
+  // DEFAULT VARIABLES, MUST BE CHANGED
+  let collector = 'USER X'
+  let default_price = 1000
+  let default_process_reward = 10
+  return {
+    type : 'processed_data',
+    id: ControllerUtil.getHashFromMagneticLink(req.body.magnet_link),
+    title: req.body.name,
+    status: 'processed',
+    magnet_link: req.body.magnet_link,
+    description: req.body.description,
+    collector: collector,
+    owners: [collector],
+    price: default_price,
+    process_reward: default_process_reward,
+    created_at: new Date().toDateString(),
+    conditions: '',
+    process_request_id: req.body.process_request_id
+  }
+}
+

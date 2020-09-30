@@ -1,4 +1,10 @@
 form
+  if (data.process_request_id)
+    .form-group
+      label.mb-1(for='process_request_id') Id da Solicitação de processamento
+      div
+        a(href='/process-request/' + data.process_request_id)
+          = data.process_request_id
   .form-row
     .form-group.col-md-6
       label.mb-1(for='type') Tipo
@@ -15,10 +21,6 @@ form
   .form-group
     label.mb-1(for='collector') Coletor
     input#collector.form-control(disabled type='text' value= data.collector)
-  if (data.processor)
-    .form-group
-      label.mb-1(for='processor') Processador
-      input#processor.form-control(disabled type='text' value= data.processor)
   .form-group
     label.mb-1(for='conditions') Condições
     input#conditions.form-control(disabled type='text' value= data.conditions)

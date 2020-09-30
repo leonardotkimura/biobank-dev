@@ -7,6 +7,10 @@ class DataContract extends SmartContract {
     await this.submitTransaction('DataContract:uploadRawData', data.id, JSON.stringify(data))
   }
 
+  async createProcessedData(data){
+    await this.submitTransaction('DataContract:uploadProcessedData', data.id, JSON.stringify(data))
+  }
+
   async updateData(data){
     await this.submitTransaction('DataContract:updateData', data.type, data.id, JSON.stringify(data))
   }

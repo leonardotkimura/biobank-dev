@@ -14,12 +14,14 @@ class SmartContract {
     await this.connectNetwork();
     const result = await this.contract.submitTransaction.apply(this.contract, arguments);
     await this.gateway.disconnect();
+    console.log(result.toString())
   }
 
   async evaluateTransaction(){
     await this.connectNetwork();
     const result = await this.contract.evaluateTransaction.apply(this.contract, arguments);
     await this.gateway.disconnect();
+    console.log(result.toString())
     if (result.length != 0) return JSON.parse(result.toString());
   }
 }
