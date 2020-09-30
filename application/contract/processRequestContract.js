@@ -1,6 +1,8 @@
 'use strict';
 
 const ConnectService = require('./../services/connectService.js');
+const SmartContract = require('./smartContract.js');
+
 
 class ProcessRequestContract {
   async connectNetwork() {
@@ -31,6 +33,7 @@ class ProcessRequestContract {
     );
 
     await this.gateway.disconnect();
+    console.log(result)
     return JSON.parse(result.toString());
   }
 

@@ -4,22 +4,26 @@ const ProcessorContract = require('../contract/processorContract');
 const ControllerUtil = require('./ControllerUtil.js');
 
 exports.index = async function(req, res, next){
-  res.render('processRequest/index', {  });
+  const processRequestContract = new ProcessRequestContract();
+  const processRequests = await processRequestContract.getAllProcessRequest();
+
+  const formattedProcessRequests = await Promise.all(processRequests.map(async function(processRequest){
+    await getDataAndProcessorForProcessRequest(processRequest)
+    formatProcessRequest(processRequest)
+    return processRequest
+  }))
+
+  res.render('processRequest/index', { processRequests: formattedProcessRequests });
 };
 
 exports.show = async function(req, res, next){
   const processRequestContract = new ProcessRequestContract();
-  const dataContract = new DataContract();
-  const processorContract = new ProcessorContract();
 
   const processRequest = await processRequestContract.readProcessRequest(req.params.processRequestId)
-  const raw_data = await dataContract.readData(processRequest.raw_data_id);
-  const processor = await processorContract.readProcessor(processRequest.processor_id)
+  await getDataAndProcessorForProcessRequest(processRequest)
+  formatProcessRequest(processRequest)
 
-  processRequest.created_at = ControllerUtil.formatDate(new Date(processRequest.created_at))
-  processRequest.status = ControllerUtil.formatProcessRequestStatus(processRequest.status);
-
-  res.render('processRequest/show', { processRequest, raw_data, processor });
+  res.render('processRequest/show', { processRequest });
 };
 
 exports.create = async function(req, res, next){
@@ -40,4 +44,18 @@ function createProcessorRequestFromRequest(req){
     status: 'not_processed',
     created_at: new Date().toDateString()
   }
+}
+
+function formatProcessRequest(processRequest){
+  processRequest.created_at = ControllerUtil.formatDate(new Date(processRequest.created_at))
+  processRequest.status = ControllerUtil.formatProcessRequestStatus(processRequest.status);
+  return processRequest
+}
+
+async function getDataAndProcessorForProcessRequest(processRequest){
+  const dataContract = new DataContract();
+  const processorContract = new ProcessorContract();
+  processRequest.raw_data = await dataContract.readData(processRequest.raw_data_id);
+  processRequest.processor = await processorContract.readProcessor(processRequest.processor_id)
+  return processRequest
 }

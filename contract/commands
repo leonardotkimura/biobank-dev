@@ -18,7 +18,7 @@ peer chaincode invoke \
 
 "{\"name\": \"myProcessor\", \"organization\": \"organizationX\", \"created_at\": \"Fri Aug 07 2020\"}"
 "{\"data_id\": \"2\", \"type\": \"upload\", \"user\": \"usuarioX\", \"transaction_id\": \"123123xxxx\", \"created_at\": \"Fri Aug 07 2020\"}"
-"{\"processor_id\": \"1\", \"raw_data_id\": \"123\", \"processed_data_id\": \"321\", \"status\": \"not_processed\", \"created_at\": \"Fri Aug 07 2020\"}"
+"{\"processor_id\": \"01b0c010-15d1-4aa7-b784-888de7e981e2\", \"raw_data_id\": \"cd04721d0f1251306c30812bc943193d9c5de79f\", \"status\": \"not_processed\", \"created_at\": \"Fri Aug 07 2020\"}"
 
 peer chaincode invoke \
     -o localhost:7050 \
