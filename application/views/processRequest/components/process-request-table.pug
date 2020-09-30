@@ -21,7 +21,8 @@
               td
                 = processRequest.raw_data.title
               td
-                = processRequest.processor.organization
+                if(processRequest.processor)
+                  = processRequest.processor.organization
               td
                 a.btn.btn-info.btn-sm.btn-circle.mr-2(
                   data-toggle="tooltip" data-placement="top" title="Ver Detalhes" href="/process-request/" + processRequest.id

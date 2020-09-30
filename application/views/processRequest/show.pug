@@ -31,16 +31,17 @@ block content
               label.mb-1(for='raw_data_id') Id do Dado Bruto
               input#raw_data_id.form-control(disabled type='text' value= processRequest.raw_data_id)
 
-          hr
-          .mb-4.mt-4.font-weight-bold
-            | Processador
-          .form-row
-            .form-group.col-md-6
-              label.mb-1(for='processor_name') Nome do Processador
-              input#processor_name.form-control(disabled type='text' value= processRequest.processor.name)
-            .form-group.col-md-6
-              label.mb-1(for='processor_id') Id do Processador
-              input#processor_id.form-control(disabled type='text' value= processRequest.processor_id)
+          if (processRequest.processor)
+            hr
+            .mb-4.mt-4.font-weight-bold
+              | Processador
+            .form-row
+              .form-group.col-md-6
+                label.mb-1(for='processor_name') Nome do Processador
+                input#processor_name.form-control(disabled type='text' value= processRequest.processor.name)
+              .form-group.col-md-6
+                label.mb-1(for='processor_id') Id do Processador
+                input#processor_id.form-control(disabled type='text' value= processRequest.processor_id)
 
           if (processRequest.processed_data)
             hr

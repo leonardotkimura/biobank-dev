@@ -20,7 +20,7 @@ class SmartContract {
     await this.connectNetwork();
     const result = await this.contract.evaluateTransaction.apply(this.contract, arguments);
     await this.gateway.disconnect();
-    return JSON.parse(result.toString());
+    if (result.length != 0) return JSON.parse(result.toString());
   }
 }
 

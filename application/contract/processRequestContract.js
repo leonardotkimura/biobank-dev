@@ -1,49 +1,18 @@
 'use strict';
 
-const ConnectService = require('./../services/connectService.js');
 const SmartContract = require('./smartContract.js');
 
-
-class ProcessRequestContract {
-  async connectNetwork() {
-    const { network, gateway, contract } = await new ConnectService().connectNetwork()
-    this.network = network;
-    this.gateway = gateway;
-    this.contract = contract
-  }
-
+class ProcessRequestContract extends SmartContract {
   async createProcessRequest(processRequest){
-    await this.connectNetwork();
-
-    const result = await this.contract.submitTransaction(
-      'ProcessRequestContract:createProcessRequest',
-      processRequest.id,
-      JSON.stringify(processRequest)
-    )
-
-    await this.gateway.disconnect();
+    const result = await this.submitTransaction('ProcessRequestContract:createProcessRequest', processRequest.id, JSON.stringify(processRequest))
   }
 
   async readProcessRequest(processRequestId) {
-    await this.connectNetwork();
-
-    const result = await this.contract.evaluateTransaction(
-      'ProcessRequestContract:readProcessRequest',
-      processRequestId
-    );
-
-    await this.gateway.disconnect();
-    console.log(result)
-    return JSON.parse(result.toString());
+    return await this.evaluateTransaction('ProcessRequestContract:readProcessRequest', processRequestId);
   }
 
   async getAllProcessRequest() {
-    await this.connectNetwork();
-
-    const result = await this.contract.evaluateTransaction('ProcessRequestContract:getAllProcessRequest');
-
-    await this.gateway.disconnect();
-    return JSON.parse(result.toString());
+    return await this.evaluateTransaction('ProcessRequestContract:getAllProcessRequest');
   }
 }
 

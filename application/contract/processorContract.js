@@ -1,6 +1,5 @@
 'use strict';
 
-const ConnectService = require('./../services/connectService.js');
 const SmartContract = require('./smartContract.js');
 
 class ProcessorContract extends SmartContract{
