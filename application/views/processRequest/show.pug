@@ -49,10 +49,10 @@ block content
             .form-row
               .form-group.col-md-6
                 label.mb-1(for='processed_data_title') Title do Dado Processado
-                input#processed_data_title.form-control(disabled type='text' value= processed_data.title)
+                input#processed_data_title.form-control(disabled type='text' value= processRequest.processed_data.title)
               .form-group.col-md-6
                 label.mb-1(for='processed_data_id') Id do Dado Processado
                 input#processed_data_id.form-control(disabled type='text' value= processRequest.processed_data_id)
-          
+
 
 block append scripts

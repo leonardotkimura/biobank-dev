@@ -15,8 +15,8 @@ class ProcessRequestContract extends SmartContract {
     return await this.evaluateTransaction('ProcessRequestContract:getAllProcessRequest');
   }
 
-  async changeStatusProcessRequest(processRequestId, newStatus) {
-    const result = await this.submitTransaction('ProcessRequestContract:changeStatusProcessRequest', processRequestId, newStatus)
+  async updateProcessRequest(processRequest){
+    await this.submitTransaction('ProcessRequestContract:updateProcessRequest', processRequest.id, JSON.stringify(processRequest))
   }
 }
 

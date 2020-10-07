@@ -33,10 +33,11 @@ class ProcessRequestContract extends Contract {
         return await ctx.processRequestList.getAllProcessRequest();
     }
 
-    async changeStatusProcessRequest(ctx, id, newStatus){
-        const processRequest = await ctx.processRequestList.getProcessRequest(id);
-        processRequest.status = newStatus;
+    async updateProcessRequest(ctx, ProcessRequestId, ProcessRequestAttributes){
+        const newProcessRequestAttributes = handleProcessRequestAttributes(ProcessRequestId, ProcessRequestAttributes);
+        const processRequest = ProcessRequest.createInstance(newProcessRequestAttributes);
         await ctx.processRequestList.updateState(processRequest);
+        return processRequest
     }
 }
 

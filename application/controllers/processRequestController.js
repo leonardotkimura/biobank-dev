@@ -57,5 +57,8 @@ async function getDataAndProcessorForProcessRequest(processRequest){
   const processorContract = new ProcessorContract();
   processRequest.raw_data = await dataContract.readData(processRequest.raw_data_id);
   processRequest.processor = await processorContract.readProcessor(processRequest.processor_id)
+  if (processRequest.processed_data_id){
+    processRequest.processed_data = await dataContract.readData(processRequest.processed_data_id);
+  }
   return processRequest
 }

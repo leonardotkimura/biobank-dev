@@ -8,8 +8,9 @@
           tr
             th Status
             th Criado em
-            th Título Dado Bruto
             th Organização do Processador
+            th Título Dado Bruto
+            th Id do Dado Bruto
             th Ação
         tbody
           each processRequest in processRequests
@@ -19,10 +20,12 @@
               td
                 = processRequest.created_at
               td
-                = processRequest.raw_data.title
-              td
                 if(processRequest.processor)
                   = processRequest.processor.organization
+              td
+                = processRequest.raw_data.title
+              td.small
+                = processRequest.raw_data.id
               td
                 a.btn.btn-info.btn-sm.btn-circle.mr-2(
                   data-toggle="tooltip" data-placement="top" title="Ver Detalhes" href="/process-request/" + processRequest.id

@@ -40,10 +40,9 @@ exports.newProcessedData = async function(req, res, next){
 exports.createProcessedData = async function(req, res, next){
   let processedData = createProcessedDataFromRequest(req);
   const dataContract = new DataContract();
-  await dataContract.createProcessedData(processedData)
+  await dataContract.createProcessedData(processedData);
   if(req.body.process_request_id) {
-    const processRequestContract = new ProcessRequestContract()
-    await processRequestContract.changeStatusProcessRequest(req.body.process_request_id, 'processed')
+    await updateProcessRequestData(req.body.process_request_id, processedData);
   }
   res.redirect("/data/" + processedData.id)
 };
@@ -121,5 +120,13 @@ function createProcessedDataFromRequest(req){
     conditions: '',
     process_request_id: req.body.process_request_id
   }
+}
+
+async function updateProcessRequestData(processRequestId, processedData){
+  const processRequestContract = new ProcessRequestContract()
+  let processRequest = await processRequestContract.readProcessRequest(processRequestId);
+  processRequest.status = 'processed';
+  processRequest.processed_data_id = processedData.id;
+  await processRequestContract.updateProcessRequest(processRequest);
 }
 
