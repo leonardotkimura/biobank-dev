@@ -42,7 +42,7 @@ exports.createProcessedData = async function(req, res, next){
   const dataContract = new DataContract();
   await dataContract.createProcessedData(processedData);
   if(req.body.process_request_id) {
-    await updateProcessRequestData(req.body.process_request_id, processedData);
+    await updateProcessRequestAndRawData(req.body.process_request_id, processedData);
   }
   res.redirect("/data/" + processedData.id)
 };
@@ -122,11 +122,16 @@ function createProcessedDataFromRequest(req){
   }
 }
 
-async function updateProcessRequestData(processRequestId, processedData){
+async function updateProcessRequestAndRawData(processRequestId, processedData){
   const processRequestContract = new ProcessRequestContract()
+  const dataContract = new DataContract();
   let processRequest = await processRequestContract.readProcessRequest(processRequestId);
   processRequest.status = 'processed';
   processRequest.processed_data_id = processedData.id;
   await processRequestContract.updateProcessRequest(processRequest);
+
+  let rawData = await dataContract.readData(processRequest.raw_data_id);
+  rawData.status = 'processed';
+  await dataContract.updateData(rawData);
 }
 
